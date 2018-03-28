@@ -6,4 +6,9 @@ post.image.url, target: '_blank') if post.image? %>
 <p><%= truncate(post.body, length: 150) %></p>
 
 <p><%= link_to 'Edit', edit_post_path(post) %></p>
+
+<p> <%= link_to 'Remove', post_path(post),
+class: 'btn btn-danger',
+    method: :delete, data: {confirm: 'Are you sure?'} %> </p>
+
 <hr>

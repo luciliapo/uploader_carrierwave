@@ -33,6 +33,10 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash[:sucess] = "The post was destroyed."
+    redirect_to root_path
   end
 
   private
