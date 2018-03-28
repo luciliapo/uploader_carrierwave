@@ -1,0 +1,25 @@
+<%= form_for post do |f| %>
+  <%= render 'shared/errors', object: post %>
+
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+
+  <% if post.image? %>
+      <%= image_tag post.image.thumb.url %>
+      <div>
+        <%= label_tag :remove_image do %>
+          Remove image
+          <%= f.check_box :remove_image %>
+        <% end %>
+      </div>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>
