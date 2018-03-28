@@ -23,3 +23,5 @@ Things you may want to cover:
 
 * ...
 # uploader_carrierwave
+
+Extracted from: https://code.tutsplus.com/articles/uploading-with-rails-and-carrierwave--cms-28409
