@@ -6,20 +6,28 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post_attachments = @post.post_attachments.all
   end
 
   def new
     @post = Post.new
+    @post_attachment = @post.post_attachments.build
   end
 
   def create
     @post = Post.new(post_params)
-    if @post.save
-      redirect_to posts_path
-    else
-      render :new
-    end
-  end
+
+    respond_to do |format|
+       if @post.save
+         params[:post_attachments]['attachments'].each do |a|
+            @post_attachment = @post.post_attachments.create!(:attachments => a)
+         end
+         format.html { redirect_to @post, notice: 'Post was successfully created.' }
+       else
+         format.html { render action: 'new' }
+       end
+     end
+   end
 
   def edit
   end
@@ -42,7 +50,8 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :image, :remove_image)
+    params.require(:post).permit(:title, :body, :image,
+      :remove_image, post_attachments_attributes: [:id, :post_id, :attachments])
   end
 
   def set_post

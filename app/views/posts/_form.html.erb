@@ -1,6 +1,6 @@
 <%= form_for post do |f| %>
   <%= render 'shared/errors', object: post %>
-  
+
   <div>
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -11,10 +11,13 @@
     <%= f.text_area :body %>
   </div>
 
-  <div>
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-  </div>
+  <%= f.fields_for :post_attachments do |p| %>
+     <div class="field">
+       <%= p.label :attachments %><br>
+       <p><%= p.file_field :attachments, :multiple => true, name: "post_attachments[attachments][]" %> </p>
+       <p><%= p.file_field :attachments, :multiple => true, name: "post_attachments[attachments][]" %> </p>
+     </div>
+   <% end %>
 
   <%= f.submit %>
 <% end %>

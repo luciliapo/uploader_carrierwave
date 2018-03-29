@@ -1,8 +1,12 @@
 <%= link_to 'All posts', posts_path %>
 <h1><%= @post.title %></h1>
 
-<%= link_to(image_tag(@post.image.thumb.url, alt: 'Image'),
-@post.image.url, target: '_blank') if @post.image? %>
+
+<% @post_attachments.each do |p| %>
+  <%= image_tag p.attachments_url %>
+  <!--<%= link_to "Edit Attachment", edit_post_attachment_path(p) %>-->
+<% end %>
+
 
 <p><%= @post.body %></p>
 
